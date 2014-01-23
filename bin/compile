@@ -397,8 +397,6 @@ mv /app/vendor/libicu vendor/libicu
 mv /app/vendor/nginx vendor/nginx
 mv /app/vendor/php vendor/php
 
-status "Buiding mysq container named ${APP_NAME}"
-dokku mysql:create $APP_NAME
 
 mkdir -p "bin"
 
