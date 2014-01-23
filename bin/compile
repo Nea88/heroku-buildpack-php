@@ -211,6 +211,10 @@ function package_compile_cmd() {
     jq --raw-output '.extra.heroku["compile"] // [] | .[]' < "$BUILD_DIR/composer.json"
 }
 
+function package_app_name() {
+    jq --raw-output '.extra.heroku["app"] // [] | .[]' < "$BUILD_DIR/composer.json"
+}
+
 function package_newrelic_enabled() {
     local val=$(jq --raw-output '.extra.heroku["newrelic"] // false' < "$BUILD_DIR/composer.json")
 
@@ -243,6 +247,7 @@ PHP_INCLUDES=
 COMPILE_CMD=
 NGINX_INCLUDES=
 NEWRELIC_VERSION=4.0.5.18
+NGINX_INCLUDES=
 
 # Read config variables from composer.json if it exists
 if [ -f "$BUILD_DIR/composer.json" ]; then
@@ -255,6 +260,7 @@ if [ -f "$BUILD_DIR/composer.json" ]; then
     PHP_INCLUDES=$(package_php_includes)
     COMPILE_CMD=$(package_compile_cmd)
     NGINX_INCLUDES=$(package_nginx_includes)
+    APP_NAME=$(package_app_name)
 fi
 
 # Try reading PHP version from .php-version file in project
@@ -434,7 +440,7 @@ touch /app/vendor/php/var/log/error.log
     nginx -p "/app/vendor/nginx" -c /app/vendor/nginx/conf/nginx.conf
     \$pmsgr < "nginx"
 )&
-
+dokku mysql:create $APP_NAME
 read exitproc <\$pmsgr
 echo "Boot failed: \$exitproc"
 exit 1
