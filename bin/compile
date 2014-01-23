@@ -263,6 +263,9 @@ if [ -f "$BUILD_DIR/composer.json" ]; then
     APP_NAME=$(package_app_name)
 fi
 
+status "APp name ${APP_NAME}"
+
+
 # Try reading PHP version from .php-version file in project
 if [ -f "$BUILD_DIR/.php-version" ]; then
     PHP_VERSION=$(cat "$BUILD_DIR/.php-version")
