@@ -212,7 +212,7 @@ function package_compile_cmd() {
 }
 
 function package_app_name() {
-    jq --raw-output '.extra.heroku["app"] // [] | .[]' < "$BUILD_DIR/composer.json"
+    jq --raw-output '.extra.heroku.app // "app"' < "$BUILD_DIR/composer.json"
 }
 
 function package_newrelic_enabled() {
@@ -248,6 +248,7 @@ COMPILE_CMD=
 NGINX_INCLUDES=
 NEWRELIC_VERSION=4.0.5.18
 NGINX_INCLUDES=
+APP_NAME
 
 # Read config variables from composer.json if it exists
 if [ -f "$BUILD_DIR/composer.json" ]; then
