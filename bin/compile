@@ -212,7 +212,7 @@ function package_compile_cmd() {
 }
 
 function package_app_name() {
-    jq --raw-output '.["app-name"] // "app"' < "$BUILD_DIR/composer.json"
+    jq --raw-output '.extra["app-name"] // "app"' < "$BUILD_DIR/composer.json"
 }
 
 function package_newrelic_enabled() {
