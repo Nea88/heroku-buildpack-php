@@ -248,7 +248,7 @@ COMPILE_CMD=
 NGINX_INCLUDES=
 NEWRELIC_VERSION=4.0.5.18
 NGINX_INCLUDES=
-APP_NAME
+APP_NAME=
 
 # Read config variables from composer.json if it exists
 if [ -f "$BUILD_DIR/composer.json" ]; then
