@@ -1,5 +1,5 @@
 #!/bin/bash
-dokku mysql:create try_again
+
 cat << EOF
 ---
 addons:
